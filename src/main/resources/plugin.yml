@@ -1,0 +1,6 @@
+name: SurvieHardcore
+version: 1.0
+main: fr.springg.surviehardcore.Main
+author: Spring_g
+commands:
+  caca:
