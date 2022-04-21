@@ -4,3 +4,6 @@ main: fr.springg.surviehardcore.Main
 author: Spring_g
 commands:
   caca:
+    description: caca
+  pipi:
+    description: pipi

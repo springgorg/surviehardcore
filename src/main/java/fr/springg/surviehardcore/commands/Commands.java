@@ -1,5 +1,6 @@
 package fr.springg.surviehardcore.commands;
 
+import fr.springg.surviehardcore.mobs.CustomSkeleton;
 import fr.springg.surviehardcore.mobs.CustomZombie;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -16,6 +17,9 @@ public class Commands implements CommandExecutor {
             if(label.equalsIgnoreCase("caca")){
                 CustomZombie customZombie = new CustomZombie();
                 customZombie.custom(p);
+            } else if(label.equalsIgnoreCase("pipi")){
+                CustomSkeleton customSkeleton = new CustomSkeleton();
+                customSkeleton.custom(p);
             }
         } else {
             Bukkit.getConsoleSender().sendMessage("§cNon");

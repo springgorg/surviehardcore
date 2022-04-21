@@ -1,4 +1,4 @@
-package fr.springg.partencouille.utils;
+package fr.springg.surviehardcore.utils;
 
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
