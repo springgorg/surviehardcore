@@ -1,10 +1,12 @@
 package fr.springg.surviehardcore.mobs;
 
+import fr.springg.surviehardcore.utils.ItemBuilder;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
@@ -17,6 +19,7 @@ import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.util.Vector;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
@@ -40,11 +43,26 @@ public class CustomSkeleton implements Listener {
     }
 
     @EventHandler
+    public void onDeath(EntityDeathEvent e){
+        if(e.getEntity() instanceof Skeleton){
+            if(e.getEntity().getCustomName().equalsIgnoreCase("§b§lLes Brooks")){
+                e.getDrops().clear();
+                Random r = new Random();
+                int chance = r.nextInt();
+                if(chance < 20) {
+                    e.getDrops().add(new ItemBuilder(Material.STICK).setName("§b§lLe baton cursed").toItemStack());
+                }
+            }
+        }
+    }
+
+    @EventHandler
     public void onThrow(EntityShootBowEvent e){
         if(e.getEntity() instanceof Skeleton){
             if(e.getEntity().getCustomName().equalsIgnoreCase("§b§lLes Brooks")){
                 e.setCancelled(true);
                 e.getEntity().launchProjectile(WitherSkull.class);
+                // Régler le bug des directions
             }
         }
     }
