@@ -3,7 +3,18 @@ version: 1.0
 main: fr.springg.surviehardcore.Main
 author: Spring_g
 commands:
-  caca:
-    description: caca
-  pipi:
-    description: pipi
+  custom:
+    description: Spawn des mobs customs
+    permission: custom.perm
+  kit:
+    description: Commande de Kit.
+  worlds:
+    description: Worlds
+    permission: worlds.perm
+  customnpc:
+    permission: npc.perm
+    description: NPC
+  menu:
+    description: Menu
+  hub:
+    description: Hub

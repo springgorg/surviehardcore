@@ -1,7 +1,10 @@
 package fr.springg.surviehardcore.mobs;
 
+import com.comphenix.protocol.wrappers.WrappedAttributeModifier;
 import fr.springg.surviehardcore.Main;
+import fr.springg.surviehardcore.utils.Attributes;
 import fr.springg.surviehardcore.utils.ItemBuilder;
+import net.minecraft.server.v1_8_R3.AttributeModifier;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -9,10 +12,13 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.UUID;
 
 public class CustomZombie implements Listener {
 
@@ -37,11 +43,10 @@ public class CustomZombie implements Listener {
 
     @EventHandler
     public void onDeath(EntityDeathEvent e){
-        if(e.getEntity() instanceof Zombie){
-            if(e.getEntity().getCustomName().equalsIgnoreCase("§c§lDobby")){
-                e.getDrops().clear();
-                e.getDrops().add(new ItemBuilder(Material.GOLD_BOOTS).setName("§c§lLes bottes cursed").toItemStack());
-            }
+        if(e.getEntity() instanceof Zombie && e.getEntity().getCustomName().equalsIgnoreCase("§c§lDobby")){
+            e.getDrops().clear();
+            ItemStack it = Attributes.addAttributes(new ItemBuilder(Material.GOLD_BOOTS).setName("§c§lLes bottes cursed").toItemStack());
+            e.getDrops().add(it);
         }
     }
 

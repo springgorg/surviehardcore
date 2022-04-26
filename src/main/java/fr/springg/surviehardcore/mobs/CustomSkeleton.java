@@ -44,14 +44,12 @@ public class CustomSkeleton implements Listener {
 
     @EventHandler
     public void onDeath(EntityDeathEvent e){
-        if(e.getEntity() instanceof Skeleton){
-            if(e.getEntity().getCustomName().equalsIgnoreCase("§b§lLes Brooks")){
-                e.getDrops().clear();
-                Random r = new Random();
-                int chance = r.nextInt();
-                if(chance < 20) {
-                    e.getDrops().add(new ItemBuilder(Material.STICK).setName("§b§lLe baton cursed").toItemStack());
-                }
+        if(e.getEntity() instanceof Skeleton && e.getEntity().getCustomName().equalsIgnoreCase("§b§lLes Brooks")){
+            e.getDrops().clear();
+            Random r = new Random();
+            int chance = r.nextInt();
+            if(chance < 20) {
+                e.getDrops().add(new ItemBuilder(Material.STICK).setName("§b§lLe baton cursed").toItemStack());
             }
         }
     }
