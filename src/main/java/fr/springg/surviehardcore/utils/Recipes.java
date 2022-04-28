@@ -29,4 +29,40 @@ public class Recipes {
         Main.getInstance().getServer().addRecipe(r);
     }
 
+    public static void sharingan(){
+        ShapedRecipe r = new ShapedRecipe(new ItemBuilder(Material.CLAY_BALL).setName("§cSharingan").toItemStack());
+        r.shape("RBR",
+                "RER",
+                "RRR");
+        r.setIngredient('R', Material.REDSTONE_BLOCK);
+        r.setIngredient('E', Material.ENDER_PEARL);
+        r.setIngredient('B', Material.COAL_BLOCK);
+
+        Main.getInstance().getServer().addRecipe(r);
+    }
+
+    public static void kamui(){
+        ShapedRecipe r = new ShapedRecipe(new ItemBuilder(Material.CLAY_BALL).setName("§cKamui").toItemStack());
+        r.shape("RBR",
+                "BEB",
+                "RBR");
+        r.setIngredient('R', Material.REDSTONE_BLOCK);
+        r.setIngredient('E', Material.ENDER_PEARL);
+        r.setIngredient('B', Material.COAL_BLOCK);
+
+        Main.getInstance().getServer().addRecipe(r);
+    }
+
+    public static void tsukuyomi(){
+        ShapedRecipe r = new ShapedRecipe(new ItemBuilder(Material.CLAY_BALL).setName("§cTsukuyomi").toItemStack());
+        r.shape("RBR",
+                "BEB",
+                "RRR");
+        r.setIngredient('R', Material.REDSTONE_BLOCK);
+        r.setIngredient('E', Material.ENDER_PEARL);
+        r.setIngredient('B', Material.COAL_BLOCK);
+
+        Main.getInstance().getServer().addRecipe(r);
+    }
+
 }

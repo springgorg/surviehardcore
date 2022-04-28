@@ -1,16 +1,16 @@
 package fr.springg.surviehardcore.listeners;
 
 import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.events.PacketContainer;
 import fr.springg.surviehardcore.Main;
 import fr.springg.surviehardcore.utils.FastBoard;
+import fr.springg.surviehardcore.utils.ItemBuilder;
 import fr.springg.surviehardcore.utils.Title;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.CitizensEnableEvent;
 import net.citizensnpcs.api.npc.NPC;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import org.bukkit.*;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,6 +21,8 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class PlayerListener implements Listener {
 
     @EventHandler
@@ -28,6 +30,20 @@ public class PlayerListener implements Listener {
         Player p = e.getPlayer();
 
         Location loc = new Location(Bukkit.getWorld("Japan-with-barrier"), -39.440, 18.000, -20.406, -44, 4);
+
+        /*String url = "";
+        String hash = null;
+
+        ((CraftPlayer) p).getHandle().setResourcePack(url, hash);
+
+        PacketContainer packet = new PacketContainer(PacketType.Play.Server.RESOURCE_PACK_SEND);
+        packet.getStrings().write(0, url);
+        packet.getStrings().write(1, hash);
+        try {
+            Main.getInstance().protocolManager.sendServerPacket(p, packet);
+        } catch (InvocationTargetException ex){
+            ex.printStackTrace();
+        }*/
 
         e.setJoinMessage("§e" + p.getName() + "§a a rejoint le serveur !");
 
@@ -50,7 +66,7 @@ public class PlayerListener implements Listener {
         Title title = new Title("§f§lBienvenue !", "", 20, 100, 20);
         title.send(p);
 
-        Bukkit.getOnlinePlayers().forEach(pls -> pls.playSound(p.getLocation(), Sound.ORB_PICKUP, 1,1));
+        Bukkit.getOnlinePlayers().forEach(pls -> pls.playSound(pls.getLocation(), Sound.ORB_PICKUP, 1,1));
     }
 
     @EventHandler

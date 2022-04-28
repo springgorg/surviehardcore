@@ -4,6 +4,7 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import fr.mrmicky.fastinv.FastInvManager;
 import fr.springg.surviehardcore.enchants.EnchantsManager;
+import fr.springg.surviehardcore.holograms.HologramManager;
 import fr.springg.surviehardcore.managers.Managers;
 import fr.springg.surviehardcore.npc.MenuTrait;
 import fr.springg.surviehardcore.npc.NPCTrait;
@@ -37,12 +38,14 @@ public class Main extends JavaPlugin {
     public final Map<String, Long> cooldowns = new HashMap<>();
     public int cooldowntime = 3600;
     public EnchantsManager enchantsManager;
+    public HologramManager hologramManager;
 
     @Override
     public void onEnable() {
         instance = this;
         protocolManager = ProtocolLibrary.getProtocolManager();
         enchantsManager = new EnchantsManager();
+        hologramManager = new HologramManager();
 
         Bukkit.getConsoleSender().sendMessage("§a[SURVIE HARDCORE]");
 
@@ -63,6 +66,9 @@ public class Main extends JavaPlugin {
         // Recipes
         Recipes.deathSword();
         Recipes.hammer();
+        Recipes.sharingan();
+        Recipes.kamui();
+        Recipes.tsukuyomi();
 
         // Traits
         if(getServer().getPluginManager().getPlugin("Citizens") == null || !getServer().getPluginManager().getPlugin("Citizens").isEnabled()) {

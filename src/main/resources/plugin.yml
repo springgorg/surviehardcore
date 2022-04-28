@@ -18,3 +18,6 @@ commands:
     description: Menu
   hub:
     description: Hub
+  hologram:
+    permission: hologram.perm
+    description: Holograms

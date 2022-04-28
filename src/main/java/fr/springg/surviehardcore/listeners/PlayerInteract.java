@@ -1,5 +1,6 @@
 package fr.springg.surviehardcore.listeners;
 
+import fr.springg.surviehardcore.Main;
 import fr.springg.surviehardcore.invs.BackroomsInv;
 import fr.springg.surviehardcore.invs.NPCInv;
 import fr.springg.surviehardcore.npc.MenuTrait;
@@ -50,10 +51,16 @@ public class PlayerInteract implements Listener {
         if(a == null || it == null) return;
         if(!it.hasItemMeta()) return;
         if((a.equals(Action.RIGHT_CLICK_AIR) || a.equals(Action.RIGHT_CLICK_BLOCK))&&it.getItemMeta().getDisplayName().equalsIgnoreCase("§b§lLe baton cursed")){
-            p.playSound(p.getLocation(), Sound.WITHER_SHOOT,1,1);
-            p.launchProjectile(WitherSkull.class).setVelocity(p.getLocation().getDirection());
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
+                p.playSound(p.getLocation(), Sound.WITHER_SHOOT,1,1);
+                p.launchProjectile(WitherSkull.class).setVelocity(p.getLocation().getDirection());
+            }, 20*2L);
         } else if(it.getItemMeta().getDisplayName().equalsIgnoreCase("§0§lNigga stick")) {
-            p.launchProjectile(EnderPearl.class).setVelocity(p.getLocation().getDirection());
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
+                p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT,1,1);
+                p.launchProjectile(EnderPearl.class).setVelocity(p.getLocation().getDirection());
+            }, 20*2L);
+
         }
     }
 
