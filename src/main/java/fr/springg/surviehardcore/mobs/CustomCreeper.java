@@ -1,11 +1,14 @@
 package fr.springg.surviehardcore.mobs;
 
-import org.bukkit.Sound;
+import fr.springg.surviehardcore.Main;
+import org.bukkit.*;
+import org.bukkit.entity.AreaEffectCloud;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class CustomCreeper implements Listener {
 

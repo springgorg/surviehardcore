@@ -1,5 +1,7 @@
 package fr.springg.surviehardcore.commands;
 
+import fr.springg.surviehardcore.Main;
+import fr.springg.surviehardcore.utils.FastBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -21,6 +23,13 @@ public class CommandHub implements CommandExecutor {
                 p.setHealth(20);
                 p.setFoodLevel(20);
                 p.setGameMode(GameMode.ADVENTURE);
+                p.getActivePotionEffects().clear();
+
+                if(!Main.getInstance().boards.containsKey(p)) {
+                    FastBoard board = new FastBoard(p);
+                    board.updateTitle("§c§lSURVIE HARDCORE");
+                    Main.getInstance().boards.put(p.getName(), board);
+                }
             } else {
                 sender.sendMessage("§cNon");
                 return false;

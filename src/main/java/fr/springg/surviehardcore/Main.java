@@ -2,6 +2,8 @@ package fr.springg.surviehardcore;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
+import com.onarandombox.MultiverseCore.MultiverseCore;
+import com.onarandombox.MultiverseCore.api.MVWorldManager;
 import fr.mrmicky.fastinv.FastInvManager;
 import fr.springg.surviehardcore.enchants.EnchantsManager;
 import fr.springg.surviehardcore.holograms.HologramManager;
@@ -39,6 +41,7 @@ public class Main extends JavaPlugin {
     public int cooldowntime = 3600;
     public EnchantsManager enchantsManager;
     public HologramManager hologramManager;
+    public MultiverseCore core = (MultiverseCore) Bukkit.getServer().getPluginManager().getPlugin("MultiverseCore");
 
     @Override
     public void onEnable() {
@@ -69,6 +72,8 @@ public class Main extends JavaPlugin {
         Recipes.sharingan();
         Recipes.kamui();
         Recipes.tsukuyomi();
+        Recipes.sakanade();
+        Recipes.genryusai();
 
         // Traits
         if(getServer().getPluginManager().getPlugin("Citizens") == null || !getServer().getPluginManager().getPlugin("Citizens").isEnabled()) {
@@ -82,6 +87,11 @@ public class Main extends JavaPlugin {
 
         // Enchants
         enchantsManager.init();
+
+        // Worlds
+        MVWorldManager worldManager = core.getMVWorldManager();
+        worldManager.loadWorld("Japan-with-barrier");
+        worldManager.loadWorld("spawnhorror");
     }
 
     @Override

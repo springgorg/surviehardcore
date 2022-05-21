@@ -22,6 +22,9 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+
 public class PlayerListener implements Listener {
 
     @EventHandler
@@ -30,8 +33,8 @@ public class PlayerListener implements Listener {
 
         Location loc = new Location(Bukkit.getWorld("Japan-with-barrier"), -39.440, 18.000, -20.406, -44, 4);
 
-        /*String url = "";
-        String hash = null;
+        String url = "https://download2283.mediafire.com/ogloraglvcug/4ish30osos8wi4j/%21+++++++++++++++++++++++++++++++++++++++++++++++++++++++++%C2%A7cYo+soy+racisto+donde+esta.zip";
+        /*String hash = "d168c2f9ac87e066d58bb841e0d9e3afeeefb1ff";
 
         ((CraftPlayer) p).getHandle().setResourcePack(url, hash);
 
@@ -40,10 +43,11 @@ public class PlayerListener implements Listener {
         packet.getStrings().write(1, hash);
         try {
             Main.getInstance().protocolManager.sendServerPacket(p, packet);
-        } catch (InvocationTargetException ex){
+        } catch (InvocationTargetException | NullPointerException ex){
             ex.printStackTrace();
         }*/
 
+        p.setResourcePack(url);
         e.setJoinMessage("§e" + p.getName() + "§a a rejoint le serveur !");
 
         p.teleport(loc);
@@ -86,7 +90,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onFood(FoodLevelChangeEvent e){
         if(e.getEntity() instanceof Player){
-            Player p =(Player) e.getEntity();
+            Player p = (Player) e.getEntity();
 
             if(p.getWorld().getName().equalsIgnoreCase("Japan-with-barrier")){
                 e.setCancelled(true);

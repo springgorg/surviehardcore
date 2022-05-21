@@ -4,10 +4,7 @@ import fr.springg.surviehardcore.Main;
 import fr.springg.surviehardcore.backrooms.MonsterStage0;
 import fr.springg.surviehardcore.commands.*;
 import fr.springg.surviehardcore.enchants.enchant.FrostWalker;
-import fr.springg.surviehardcore.listeners.CancelsListener;
-import fr.springg.surviehardcore.listeners.HammerListener;
-import fr.springg.surviehardcore.listeners.PlayerInteract;
-import fr.springg.surviehardcore.listeners.PlayerListener;
+import fr.springg.surviehardcore.listeners.*;
 import fr.springg.surviehardcore.mobs.CustomCreeper;
 import fr.springg.surviehardcore.mobs.CustomEnderman;
 import fr.springg.surviehardcore.mobs.CustomSkeleton;
@@ -46,6 +43,8 @@ public class Managers {
         pm.registerEvents(new PlayerListener(), main);
         pm.registerEvents(new HammerListener(), main);
         pm.registerEvents(new CancelsListener(), main);
+        pm.registerEvents(new SakanadeListener(), main);
+        pm.registerEvents(new GenryusaiListener(), main);
 
         // Enchantments
         pm.registerEvents(new FrostWalker(101), main);

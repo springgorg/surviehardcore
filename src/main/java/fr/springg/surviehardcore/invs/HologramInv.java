@@ -18,7 +18,8 @@ public class HologramInv extends FastInv {
             addItem(new ItemBuilder(Material.SKULL_ITEM).setName(hologram.getName()).setLore("",
                     "§dx:"+hologram.getLoc().getX(),
                     "§dy:"+hologram.getLoc().getY(),
-                    "§dz:"+hologram.getLoc().getZ()).toItemStack());
+                    "§dz:"+hologram.getLoc().getZ(),
+                    "§dworld:"+hologram.getLoc().getWorld().getName()).toItemStack());
         });
 
     }

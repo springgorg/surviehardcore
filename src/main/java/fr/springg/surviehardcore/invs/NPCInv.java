@@ -34,7 +34,9 @@ public class NPCInv extends FastInv {
         setItem(44, new ItemBuilder(Material.STAINED_GLASS_PANE).toItemStack());
 
         // ITEMS INV
+        setItem(10, new ItemBuilder(Material.GRASS).setName("§cSurvieHardcore").toItemStack());
         setItem(13, new ItemBuilder(Material.BEDROCK).setName("§0§l§kkkkkkk").toItemStack());
+        setItem(16, new ItemBuilder(Material.GOLD_INGOT).setName("§aBoutique").toItemStack());
     }
 
     @Override
@@ -47,6 +49,21 @@ public class NPCInv extends FastInv {
         if(e.getInventory().getName().equalsIgnoreCase("§cMenu")){
 
             switch(it.getType()){
+
+                case GRASS:
+                    new Title("§f§lTéléportation !", "§cBienvenue au monde SurvieHardcore =)",20,100,20).send(p);
+                    p.setGameMode(GameMode.SURVIVAL);
+                    World w = Bukkit.getWorld("world");
+                    p.teleport(new Location(w, w.getSpawnLocation().getX(), w.getSpawnLocation().getY(), w.getSpawnLocation().getZ()));
+                    p.playSound(p.getLocation(), Sound.PORTAL_TRAVEL,1,0);
+                    p.closeInventory();
+                    break;
+
+                case GOLD_INGOT:
+                    p.closeInventory();
+                    p.playSound(p.getLocation(), Sound.VILLAGER_NO, 1,1);
+                    p.sendMessage("§c§lBientôt !");
+                    break;
 
                 case BEDROCK:
                     p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 5*20,10));

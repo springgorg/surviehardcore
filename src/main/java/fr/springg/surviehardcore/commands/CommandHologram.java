@@ -24,27 +24,44 @@ public class CommandHologram implements CommandExecutor {
                     if(args.length == 0){
                         p.playSound(p.getLocation(), Sound.VILLAGER_NO, 1,1);
                         p.sendMessage("§c[SHC]----[HOLOGRAM]----[SHC]");
+                        p.sendMessage(" ");
                         p.sendMessage("§c/hologram create <name>");
                         p.sendMessage("§c/hologram list");
                         p.sendMessage("§c/hologram delete <name>");
+                        p.sendMessage(" ");
                         p.sendMessage("§c[SHC]----[HOLOGRAM]----[SHC]");
                         return false;
                     }
 
                     if(args[0].equalsIgnoreCase("create")){
-                        String name = args[1];
-                        Hologram hologram = new Hologram(name, p.getLocation());
-                        hologram.create();
+                        if(args.length > 1) {
+                            String name = "";
+                            for(int i = 1; i != args.length; i++) name += args[i] + " ";
+                            Hologram hologram = new Hologram(name, p.getLocation());
+                            hologram.create();
 
-                        Main.getInstance().hologramManager.getHolograms().add(hologram);
+                            Main.getInstance().hologramManager.getHolograms().add(hologram);
 
-                        p.playSound(p.getLocation(), Sound.LEVEL_UP,1,2);
-                        p.sendMessage("§aVous avez crée l'hologramme §d" + name + "§a avec succès !");
+                            p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 2);
+                            p.sendMessage("§aVous avez crée l'hologramme §d" + name + "§a avec succès !");
+                        }
                     } else if(args[0].equalsIgnoreCase("list")){
                         new HologramInv().open(p);
                         p.playSound(p.getLocation(), Sound.NOTE_PLING,1,2);
                     } else if(args[0].equalsIgnoreCase("delete")){
-                        // EN COURS
+                        if(args.length > 1){
+                            String name = "";
+                            for(int i = 1; i!=args.length;i++) name += args[i] + " ";
+
+                            Hologram hologram = new Hologram(name, p.getLocation());
+                            if(Main.getInstance().hologramManager.getHolograms().contains(hologram)) {
+                                hologram.delete();
+                                Main.getInstance().hologramManager.getHolograms().remove(hologram);
+                            } else {
+                                p.sendMessage("§cCet hologramme n'existe pas !");
+                                return false;
+                            }
+                        }
                     }
 
                 } else {

@@ -43,6 +43,12 @@ public class PlayerInteract implements Listener {
     }
 
     @EventHandler
+    public void onCitizensDisable(CitizensDisableEvent e){
+        CitizensAPI.getNPCRegistries().forEach(NPCRegistry::deregisterAll);
+        Bukkit.getConsoleSender().sendMessage("§c[SURVIE HARDCORE] SUPPRESSION DES NPC !");
+    }
+
+    @EventHandler
     public void onInteract(PlayerInteractEvent e){
         Player p = e.getPlayer();
         Action a = e.getAction();
@@ -54,12 +60,12 @@ public class PlayerInteract implements Listener {
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
                 p.playSound(p.getLocation(), Sound.WITHER_SHOOT,1,1);
                 p.launchProjectile(WitherSkull.class).setVelocity(p.getLocation().getDirection());
-            }, 20*2L);
+            }, 20);
         } else if(it.getItemMeta().getDisplayName().equalsIgnoreCase("§0§lNigga stick")) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
                 p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT,1,1);
                 p.launchProjectile(EnderPearl.class).setVelocity(p.getLocation().getDirection());
-            }, 20*2L);
+            }, 20);
 
         }
     }

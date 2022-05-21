@@ -15,6 +15,7 @@ public class WorldInv extends FastInv {
         Bukkit.getWorlds().forEach(w -> {
             addItem(new ItemBuilder(Material.GRASS).setName(w.getName()).toItemStack());
         });
+        setItem(53, new ItemStack(Material.BEDROCK));
     }
 
     @Override
@@ -38,6 +39,8 @@ public class WorldInv extends FastInv {
                     p.playSound(p.getLocation(), Sound.PORTAL_TRAVEL, 1, 1);
                     p.closeInventory();
                 }
+            } else if(it.getType().equals(Material.BEDROCK)){
+                p.teleport(new Location(Bukkit.getWorld("world"), 1033, 64,950));
             }
 
         }

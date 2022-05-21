@@ -18,6 +18,28 @@ public class Recipes {
         Main.getInstance().getServer().addRecipe(r);
     }
 
+    public static void genryusai(){
+        ShapedRecipe r = new ShapedRecipe(new ItemBuilder(Material.DIAMOND_SWORD).setName("§4§lGenryusai").toItemStack());
+        r.shape(" B ",
+                "BDB",
+                " B ");
+        r.setIngredient('B', Material.BLAZE_ROD);
+        r.setIngredient('D', Material.DIAMOND_SWORD);
+
+        Main.getInstance().getServer().addRecipe(r);
+    }
+
+    public static void sakanade(){
+        ShapedRecipe r = new ShapedRecipe(new ItemBuilder(Material.IRON_SWORD).setName("§5Sakanade").toItemStack());
+        r.shape(" I ",
+                "ISI",
+                " I ");
+        r.setIngredient('I', Material.IRON_BLOCK);
+        r.setIngredient('S', Material.IRON_SWORD);
+
+        Main.getInstance().getServer().addRecipe(r);
+    }
+
     public static void hammer(){
         ShapedRecipe r = new ShapedRecipe(new ItemBuilder(Material.DIAMOND_PICKAXE).setName("§cMarteau").toItemStack());
         r.shape("DDD",

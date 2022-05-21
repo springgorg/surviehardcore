@@ -1,5 +1,6 @@
 package fr.springg.surviehardcore.holograms;
 
+import fr.springg.surviehardcore.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
@@ -21,6 +22,15 @@ public class Hologram {
         stand.setCustomNameVisible(true);
         stand.setVisible(false);
         stand.setGravity(false);
+    }
+
+    public void delete(){
+        loc.getWorld().getEntities().forEach(ent -> {
+            ArmorStand stand = (ArmorStand) ent.getWorld();
+            if(ent.getCustomName().equals(name) || ent.getName().equals(name)){
+                ent.remove();
+            }
+        });
     }
 
     public Location getLoc() { return loc; }
