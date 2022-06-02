@@ -28,7 +28,12 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PlayerInteract implements Listener {
+
+    Map<String, Long> cooldowns = new HashMap<>();
 
     @EventHandler
     public void onCitizensEnable(CitizensEnableEvent e){
@@ -57,6 +62,16 @@ public class PlayerInteract implements Listener {
         if(a == null || it == null) return;
         if(!it.hasItemMeta()) return;
         if((a.equals(Action.RIGHT_CLICK_AIR) || a.equals(Action.RIGHT_CLICK_BLOCK))&&it.getItemMeta().getDisplayName().equalsIgnoreCase("§b§lLe baton cursed")){
+
+            if(cooldowns.containsKey(p.getName())){
+                if(cooldowns.get(p.getName()) > System.currentTimeMillis()){
+                    long timeleft = (cooldowns.get(p.getName())-System.currentTimeMillis()/1000);
+                    p.sendMessage("§cTemps restant : §f" + timeleft + " secondes");
+                }
+            }
+
+            cooldowns.put(p.getName(), System.currentTimeMillis()+(5*1000));
+
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
                 p.playSound(p.getLocation(), Sound.WITHER_SHOOT,1,1);
                 p.launchProjectile(WitherSkull.class).setVelocity(p.getLocation().getDirection());
@@ -66,6 +81,15 @@ public class PlayerInteract implements Listener {
                 p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT,1,1);
                 p.launchProjectile(EnderPearl.class).setVelocity(p.getLocation().getDirection());
             }, 20);
+
+            if(cooldowns.containsKey(p.getName())){
+                if(cooldowns.get(p.getName()) > System.currentTimeMillis()){
+                    long timeleft = (cooldowns.get(p.getName())-System.currentTimeMillis()/1000);
+                    p.sendMessage("§cTemps restant : §f" + timeleft + " secondes");
+                }
+            }
+
+            cooldowns.put(p.getName(), System.currentTimeMillis()+(5*1000));
 
         }
     }

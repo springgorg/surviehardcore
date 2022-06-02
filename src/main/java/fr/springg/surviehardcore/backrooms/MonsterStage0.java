@@ -1,24 +1,15 @@
 package fr.springg.surviehardcore.backrooms;
 
-import fr.springg.surviehardcore.utils.Title;
-import net.minecraft.server.v1_8_R3.EntityEnderman;
-import net.minecraft.server.v1_8_R3.EntityPlayer;
-import net.minecraft.server.v1_8_R3.PathfinderGoalNearestAttackableTarget;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.entity.Enderman;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -68,27 +59,27 @@ public class MonsterStage0 implements Listener {
                     Player p = (Player) e.getEntity();
                     monsterTouch.add(p);
                     if(monsterTouch.contains(p)) {
-                        p.setHealth(0.0);
-                        p.playSound(p.getLocation(), Sound.GHAST_DEATH,2,0);
+                        p.setHealth(1.0);
                         monsterTouch.remove(p);
+                    }
+
+                    if(p.getHealth() == 1.0){
+                        if(!BackroomsUtils.backrooms.contains(p)) return;
+                        ((Enderman) e.getDamager()).setHealth(0.0);
+                        p.setHealth(p.getMaxHealth());
+
+                        BackroomsUtils.backrooms.remove(p);
+                        p.teleport(new Location(Bukkit.getWorld("Japan-with-barrier"), -39.440, 18.000, -20.406, -44, 4));
+                        p.playSound(p.getLocation(), Sound.GHAST_DEATH,2,0);
+                        p.setFoodLevel(20);
+                        p.setGameMode(GameMode.ADVENTURE);
+                        p.removePotionEffect(PotionEffectType.SPEED);
+                        p.removePotionEffect(PotionEffectType.SATURATION);
+                        p.removePotionEffect(PotionEffectType.BLINDNESS);
                     }
                 }
             }
         }
-    }
-
-    @EventHandler
-    public void onDeath(PlayerDeathEvent e){
-        Player p = e.getEntity();
-        e.setDeathMessage("§cLe joueur §4" + p.getName()+ "§c s'est fait tué par §r" + p.getKiller().getName());
-
-        BackroomsUtils.backrooms.remove(p);
-        p.spigot().respawn();
-        p.teleport(new Location(Bukkit.getWorld("Japan-with-barrier"), -39.440, 18.000, -20.406, -44, 4));
-        p.setHealth(20.0);
-        p.setFoodLevel(20);
-        p.setGameMode(GameMode.ADVENTURE);
-        p.getActivePotionEffects().clear();
     }
 
 }

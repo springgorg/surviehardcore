@@ -8,23 +8,23 @@ import fr.mrmicky.fastinv.FastInvManager;
 import fr.springg.surviehardcore.enchants.EnchantsManager;
 import fr.springg.surviehardcore.holograms.HologramManager;
 import fr.springg.surviehardcore.managers.Managers;
+import fr.springg.surviehardcore.maps.ImageMapManager;
 import fr.springg.surviehardcore.npc.MenuTrait;
 import fr.springg.surviehardcore.npc.NPCTrait;
+import fr.springg.surviehardcore.utils.DataLoader;
 import fr.springg.surviehardcore.utils.FastBoard;
 import fr.springg.surviehardcore.utils.Recipes;
 import fr.springg.surviehardcore.worlds.CustomChunk;
 import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.event.CitizensEnableEvent;
-import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.TraitInfo;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.EntityType;
-import org.bukkit.event.EventHandler;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,6 +35,9 @@ import java.util.logging.Level;
 public class Main extends JavaPlugin {
 
     private static Main instance;
+    public static File IMAGES_DIR;
+    public static File IMAGES_MAP_DIR;
+    public static ImageMapManager IMAGES_MAP_MANAGER;
     public ProtocolManager protocolManager;
     public final Map<String, FastBoard> boards = new HashMap<>();
     public final Map<String, Long> cooldowns = new HashMap<>();
@@ -74,6 +77,8 @@ public class Main extends JavaPlugin {
         Recipes.tsukuyomi();
         Recipes.sakanade();
         Recipes.genryusai();
+        Recipes.sakashima();
+        Recipes.shinraTensei();
 
         // Traits
         if(getServer().getPluginManager().getPlugin("Citizens") == null || !getServer().getPluginManager().getPlugin("Citizens").isEnabled()) {
@@ -92,6 +97,22 @@ public class Main extends JavaPlugin {
         MVWorldManager worldManager = core.getMVWorldManager();
         worldManager.loadWorld("Japan-with-barrier");
         worldManager.loadWorld("spawnhorror");
+        worldManager.loadWorld("tests");
+        worldManager.loadWorld("kamui");
+        worldManager.loadWorld("UpsideDown_Challenge");
+
+        //Maps
+        IMAGES_DIR = new File(getDataFolder(), "images");
+        IMAGES_MAP_DIR = new File(getDataFolder(), "maps");
+        IMAGES_MAP_MANAGER = new ImageMapManager();
+
+        try {
+            DataLoader.loadMaps();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Bukkit.getConsoleSender().sendMessage("§a[SURVIE HARDCORE] PLUGIN ENABLED");
     }
 
     @Override
@@ -99,6 +120,8 @@ public class Main extends JavaPlugin {
         EnchantsManager.enchants.forEach(enchantment -> {
            enchantsManager.disable(enchantment);
         });
+
+        Bukkit.getConsoleSender().sendMessage("§c[SURVIE HARDCORE] PLUGIN DISABLED");
     }
 
     private void updateBoard(FastBoard board){

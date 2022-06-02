@@ -1,17 +1,14 @@
 package fr.springg.surviehardcore.listeners;
 
 import fr.springg.surviehardcore.Main;
-import fr.springg.surviehardcore.utils.ItemBuilder;
+import fr.springg.surviehardcore.tasks.TaskSakanade;
 import org.bukkit.*;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
 
 public class SakanadeListener implements Listener {
 
@@ -26,7 +23,11 @@ public class SakanadeListener implements Listener {
 
         if(a.equals(Action.RIGHT_CLICK_AIR) || a.equals(Action.RIGHT_CLICK_BLOCK)) {
             if (it.getType() == Material.IRON_SWORD && it.getItemMeta().getDisplayName().equalsIgnoreCase("§5Sakanade")) {
-                Location center = p.getLocation().getBlock().getLocation().clone().add(0.5, 1, 0.5);
+                new TaskSakanade(p).runTaskTimer(Main.getInstance(), 20,20);
+                if(p.getWorld().getName().equalsIgnoreCase("UpsideDown_Challenge")){
+                    // Teleport
+                }
+                /*Location center = p.getLocation().getBlock().getLocation().clone().add(0.5, 1, 0.5);
 
                 new BukkitRunnable() {
 
@@ -53,7 +54,7 @@ public class SakanadeListener implements Listener {
 
                         armorStand.teleport(center.clone().add(x, y, 0));
                     }
-                }.runTaskTimer(Main.getInstance(), 0, 1);
+                }.runTaskTimer(Main.getInstance(), 0, 1);*/
             }
         }
     }

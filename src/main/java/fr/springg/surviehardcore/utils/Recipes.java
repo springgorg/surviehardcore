@@ -7,6 +7,18 @@ import org.bukkit.inventory.ShapedRecipe;
 
 public class Recipes {
 
+    public static void shinraTensei(){
+        ShapedRecipe r = new ShapedRecipe(new ItemBuilder(Material.CLAY_BALL).setName("§dShinra Tensei").toItemStack());
+        r.shape("BYB",
+                "YEY",
+                "BYB");
+        r.setIngredient('B', Material.BEACON);
+        r.setIngredient('Y', Material.EYE_OF_ENDER);
+        r.setIngredient('E', Material.ENDER_PEARL);
+
+        Main.getInstance().getServer().addRecipe(r);
+    }
+
     public static void deathSword(){
         ShapedRecipe r = new ShapedRecipe(new ItemBuilder(Material.DIAMOND_SWORD).setName("§cEpée de la mort").addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1000).toItemStack());
         r.shape(" N ",
@@ -14,6 +26,17 @@ public class Recipes {
                 " B ");
         r.setIngredient('N', Material.NETHER_STAR);
         r.setIngredient('B', Material.BLAZE_ROD);
+
+        Main.getInstance().getServer().addRecipe(r);
+    }
+
+    public static void sakashima(){
+        ShapedRecipe r = new ShapedRecipe(new ItemBuilder(Material.IRON_SWORD).setName("§5Sakashima Yokoshima Happofusagari").toItemStack());
+        r.shape(" B ",
+                "BSB",
+                " B ");
+        r.setIngredient('B', Material.BLAZE_ROD);
+        r.setIngredient('S', Material.IRON_SWORD);
 
         Main.getInstance().getServer().addRecipe(r);
     }

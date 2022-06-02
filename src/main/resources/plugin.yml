@@ -22,3 +22,6 @@ commands:
   hologram:
     permission: hologram.perm
     description: Holograms
+  map:
+    permission: map.use
+    description: Maps

@@ -25,6 +25,7 @@ public class Managers {
         main.getCommand("menu").setExecutor(new CommandMenu());
         main.getCommand("hub").setExecutor(new CommandHub());
         main.getCommand("hologram").setExecutor(new CommandHologram());
+        main.getCommand("map").setExecutor(new CommandMap());
     }
 
     public static void registerListeners(){
@@ -39,12 +40,15 @@ public class Managers {
         pm.registerEvents(new MonsterStage0(), main);
 
         // Players Events
+        pm.registerEvents(new EyeListener(), main);
         pm.registerEvents(new PlayerInteract(), main);
         pm.registerEvents(new PlayerListener(), main);
         pm.registerEvents(new HammerListener(), main);
         pm.registerEvents(new CancelsListener(), main);
         pm.registerEvents(new SakanadeListener(), main);
         pm.registerEvents(new GenryusaiListener(), main);
+        pm.registerEvents(new SakashimaListener(), main);
+        pm.registerEvents(new ShinraListener(), main);
 
         // Enchantments
         pm.registerEvents(new FrostWalker(101), main);

@@ -49,10 +49,11 @@ public class BackroomsInv extends FastInv {
                                 double y = p.getLocation().getY();
                                 double z = p.getLocation().getZ();
                                 p.setGameMode(GameMode.SPECTATOR);
-                                p.teleport(new Location(Bukkit.getWorld(p.getWorld().getName()), x, y-timer, z));
+                                p.teleport(new Location(Bukkit.getWorld(p.getWorld().getName()), x, y-1, z, 90.7f,1.8f));
                             }
                             if(timer == 0){
                                 p.closeInventory();
+                                p.setGameMode(GameMode.ADVENTURE);
                                 p.teleport(new Location(Bukkit.getWorld("tests"), -9.557, 1.00, 6.537, (float)-45.4, (float)0.4));
                                 p.playSound(p.getLocation(), Sound.HORSE_DEATH,2,0);
                                 Title title = new Title("§4§lBonne chance =)", "", 20,100,20);

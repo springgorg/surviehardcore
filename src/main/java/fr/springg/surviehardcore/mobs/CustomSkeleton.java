@@ -59,7 +59,7 @@ public class CustomSkeleton implements Listener {
         if(e.getEntity() instanceof Skeleton){
             if(e.getEntity().getCustomName().equalsIgnoreCase("§b§lLes Brooks")){
                 e.setCancelled(true);
-                e.getEntity().launchProjectile(WitherSkull.class);
+                e.getEntity().launchProjectile(WitherSkull.class, e.getEntity().getLocation().getDirection());
                 // Régler le bug des directions
             }
         }
